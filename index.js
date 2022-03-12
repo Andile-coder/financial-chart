@@ -58,7 +58,9 @@ const data = {
 
 const options = {
   plugins: {
-    hover: { mode: null },
+    tooltip: {
+      enabled: false,
+    },
     legend: {
       display: false,
       labels: {
@@ -70,7 +72,6 @@ const options = {
   scales: {
     y: {
       type: "linear",
-
       grid: {
         display: false,
       },
@@ -108,7 +109,6 @@ oneDay.addEventListener("click", async (e) => {
   ylabels.splice(0, ylabels.length);
   xlabels.splice(0, xlabels.length);
   await getdata("1", "minute");
-  console.log("========", xlabels.length);
   render();
 });
 sevenDay.addEventListener("click", async (e) => {
@@ -116,7 +116,6 @@ sevenDay.addEventListener("click", async (e) => {
   ylabels.splice(0, ylabels.length);
   xlabels.splice(0, xlabels.length);
   await getdata("7", "hourly");
-  console.log("========", ylabels.length);
   render();
 });
 
