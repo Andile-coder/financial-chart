@@ -55,11 +55,21 @@ const data = {
     },
   ],
 };
+const footer = (tooltipItems) => {
+  let sum = 0;
+
+  tooltipItems.forEach(function (tooltipItem) {
+    sum += tooltipItem.parsed.y;
+  });
+  return "Price:" + sum;
+};
 
 const options = {
   plugins: {
     tooltip: {
-      enabled: false,
+      callbacks: {
+        footer: footer,
+      },
     },
     legend: {
       display: false,
@@ -78,6 +88,7 @@ const options = {
       beginAtZero: false,
     },
     x: {
+      title: "time",
       grid: {
         display: false,
       },
