@@ -2,7 +2,7 @@
   overflow: visible;
 }
 .line {
-  background-color: red;
+  background-color: rgb(155, 148, 148);
   width: 1px;
   height: 1px;
   margin: 0;
