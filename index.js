@@ -1,11 +1,28 @@
 // get the buttons
 const oneDay = document.getElementById("1d");
 const sevenDay = document.getElementById("7d");
+const horizontal = document.getElementById("horizontal");
+const vertical = document.getElementById("vertical");
+const wrapper = document.getElementById("wrapper");
 
 let xlabels = [];
 let ylabels = [];
 let week = 1;
 let hour = 1;
+function getMousePos(canvas, evt) {
+  var rect = canvas.getBoundingClientRect();
+  return {
+    x: evt.clientX - 1,
+    y: evt.clientY - 1,
+  };
+}
+wrapper.addEventListener("mousemove", (evt) => {
+  var mousePos = getMousePos(wrapper, evt);
+  var message = "Mouse position: " + mousePos.x + "," + mousePos.y;
+  vertical.style.left = `${mousePos.x}px`;
+  horizontal.style.top = `${mousePos.y}px`;
+});
+
 async function getdata(day, interval) {
   hour = 1;
   week = 1;
@@ -65,6 +82,10 @@ const footer = (tooltipItems) => {
 };
 
 const options = {
+  interaction: {
+    intersect: false,
+    mode: "x",
+  },
   plugins: {
     tooltip: {
       callbacks: {
@@ -77,7 +98,6 @@ const options = {
         display: false,
       },
     },
-    events: [],
   },
   scales: {
     y: {
@@ -96,12 +116,15 @@ const options = {
   },
 };
 //create chart
+
 const ctx = document.getElementById("myChart").getContext("2d");
+let canvas = document.getElementById("myChart");
 let myChart = new Chart(ctx, {
   type: "line",
   data,
   options,
 });
+
 //destroy chart
 function destroyer() {
   myChart.destroy();
